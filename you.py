@@ -1,8 +1,12 @@
 import pymongo
 import psycopg2
+import requests
 import pandas as pd
 import streamlit as st
 from googleapiclient.discovery import build
+from streamlit_lottie import st_lottie
+
+
 
 #API key connection
 def Api_connect():
@@ -487,15 +491,32 @@ def show_comments_table():
     comments_table = st.dataframe(com_list)
     return comments_table
 
+def load_lottieurl(url:str):
+    r=requests.get(url)
+    if r.status_code!=200:
+        return None
+    return r.json()
+
+st.image('How-Does-YouTube-Store-And-Analyze-Such-Huge-Amount-of-Data.png', caption='Sunrise by the mountains')
 with st.sidebar:
+    Yt_Logo=load_lottieurl("https://lottie.host/c8da6b7e-f152-4dba-a588-66687451a3d7/nUxIril3YA.json")
+    st_lottie(Yt_Logo)
     st.title(":red[YOUTUBE DATA HARVESTING AND WAREHOUSING]")
-    st.header("SKILL TAKE AWAY")
-    st.caption('Python scripting')
-    st.caption("Data Collection")
-    st.caption("MongoDB")
-    st.caption("API Integration")
-    st.caption(" Data Managment using MongoDB and SQL")
+    st.caption("Project Done By")
+    st.title(":orange[INFANT ANDREW R]")
+    st.header(":blue[SKILL TAKE AWAY]")
+    st.caption(':green[Python scripting]')
+    st.caption(":green[Data Collection]")
+    st.caption(":green[MongoDB]")
+    st.caption(":green[API Integration]")
+    st.caption(" :green[Data Managment using MongoDB and SQL]")
+    st.caption(" ")
+    st.caption(" ")
+    st.caption(" ")
+
     
+
+
 channel_id = st.text_input("Enter the Channel id")
 channels = channel_id.split(',')
 channels = [ch.strip() for ch in channels if ch]
